@@ -19,5 +19,5 @@ func NewUserHandler(service *service.UserService) *UserHandler {
 func (u *UserHandler) GetUsers(ctx *gin.Context) {
 	response := u.service.GetUsers()
 
-	WriteErrorJsonResponse(ctx, response)
+	WriteJsonResponse(ctx, response)
 }

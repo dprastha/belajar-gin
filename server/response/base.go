@@ -17,7 +17,7 @@ func StatusCreated(payload interface{}) *Response {
 
 func SuccessFind(payload interface{}) *Response {
 	return &Response{
-		Status:  http.StatusCreated,
+		Status:  http.StatusOK,
 		Payload: payload,
 	}
 }

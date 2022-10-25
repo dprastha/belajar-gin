@@ -9,6 +9,7 @@ type BaseModel struct {
 }
 
 type User struct {
+	BaseModel
 	Fullname string `json:"fullname"`
 	Email    string `json:"email"`
 	Nip      string `json:"nip"`

@@ -16,6 +16,20 @@ func NewService(repo repository.UserRepo) *UserService {
 	}
 }
 
+func (u *UserService) GetUsers() *response.Response {
+	users, err := u.repo.GetUsers()
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return response.ErrNotFound()
+		}
+
+		return response.ErrInternalServerError(err.Error())
+	}
+
+	return response.SuccessFind(response.NewUserFindAllResponse(users))
+}
+
 func (u *UserService) FindUserByEmail(email string) *response.Response {
 	user, err := u.repo.FindUserByEmail(email)
 
@@ -24,7 +38,7 @@ func (u *UserService) FindUserByEmail(email string) *response.Response {
 			return response.ErrNotFound()
 		}
 
-		return response.ErrInternalServerError(err)
+		return response.ErrInternalServerError(err.Error())
 	}
 
 	return response.SuccessFind(user)

@@ -15,7 +15,7 @@ func StatusCreated(payload interface{}) *Response {
 	}
 }
 
-func SuccessFindAll(payload interface{}) *Response {
+func SuccessFind(payload interface{}) *Response {
 	return &Response{
 		Status:  http.StatusCreated,
 		Payload: payload,
@@ -36,7 +36,7 @@ func ErrInternalServerError(err interface{}) *Response {
 	}
 }
 
-func ErrNotFOund(err interface{}) *Response {
+func ErrNotFound() *Response {
 	return &Response{
 		Status: http.StatusNotFound,
 		Error:  "Data not found",

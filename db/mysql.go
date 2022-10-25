@@ -1,6 +1,7 @@
 package db
 
 import (
+	"belajar-gin/server/model"
 	"fmt"
 
 	"gorm.io/driver/mysql"
@@ -26,6 +27,8 @@ func ConnectDB() (*gorm.DB, error) {
 	if err != nil {
 		panic(err)
 	}
+
+	gormDB.Debug().AutoMigrate(model.User{})
 
 	return gormDB, nil
 }

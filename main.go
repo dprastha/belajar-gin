@@ -2,8 +2,10 @@ package main
 
 import (
 	"belajar-gin/db"
-	"fmt"
-	"net/http"
+	"belajar-gin/server"
+	"belajar-gin/server/controller"
+	"belajar-gin/server/repository"
+	"belajar-gin/server/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,14 +16,12 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(db)
+	userRepo := repository.NewUserRepo(db)
+	userService := service.NewService(userRepo)
+	userHandler := controller.NewUserHandler(userService)
 
-	r := gin.Default()
-	r.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	router := gin.Default()
+	app := server.NewRouter(router, userHandler)
 
-	r.Run()
+	app.Start(":8080")
 }

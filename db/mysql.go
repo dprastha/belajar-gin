@@ -27,7 +27,5 @@ func ConnectDB() (*gorm.DB, error) {
 		panic(err)
 	}
 
-	fmt.Println(gormDB)
-
 	return gormDB, nil
 }
